@@ -1,24 +1,25 @@
-type UserType = "sender" | "receiver";
+export type UserType = "sender" | "receiver";
 
 interface MessageBoxProps {
   message: string;
   userType: UserType;
+  time: string;
 }
 
-export default function MessageBox({ message, userType }: MessageBoxProps) {
+export default function MessageBox({ message, userType, time }: MessageBoxProps) {
   const isSender = userType === "sender";
 
   return (
     <div
-      className={`p-4 rounded-lg mb-4 max-w-xs ${
+      className={`p-3 rounded-2xl mb-2 max-w-xs transition-all duration-200 ${
         isSender
-          ? "border border-green-400 text-right ml-auto"
-          : "border border-green-400 text-left mr-auto"
+          ? "bg-blue-600 text-white ml-auto shadow-md"
+          : "bg-gray-700 text-gray-100 mr-auto shadow-md"
       }`}
-      role="note"
       aria-label={isSender ? "Sent message" : "Received message"}
     >
-      <p className="text-green-500 break-words">{message}</p>
+      <p className="text-sm leading-relaxed break-words">{message}</p>
+      <span className="text-xs text-white/70">{time}</span>
     </div>
   );
 }       
